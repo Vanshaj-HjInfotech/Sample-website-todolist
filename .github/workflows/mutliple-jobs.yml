@@ -49,5 +49,5 @@ jobs:
       run: cat dragon.txt
 
     - name: Deploy
-      run: echo Deploying ....
+      run: echo Deploying .... in the self-hosted machine
   
