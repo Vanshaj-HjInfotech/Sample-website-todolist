@@ -6,13 +6,12 @@ on:
         required: true
         default: dev
         type: choice
-        options:
-          - dev
-          - staging
-          - prod
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Environment:${{ github.event.inputs.environment }}"
+
+
