@@ -8,11 +8,13 @@ jobs:
     runs-on: self-hosted
     steps:
 
-    - name: install Cowsay program
-      run: sudo apt-get install cowsay -y
+    - name: Install Cowsay program
+      shell: powershell
+      run: choco install cowsay -y
 
     - name: Execute cowsay CMD
-      run: cowsay -f dragon "Run for cover, I am dragon" >> dragon.txt
+      shell: powershell
+      run: cowsay "Run for cover, I am dragon" | Out-File -FilePath dragon.txt -Encoding utf8
 
     # - name: Upload file to Artifact
     #   uses: actions/upload-artifact@v4
@@ -28,26 +30,30 @@ jobs:
 
     # - name: Download dragon text file
     #   uses: actions/download-artifact@v4
-      # with:
-      #   name: dragon-text-file
-
+    #   with:
+    #     name: dragon-text-file
 
     - name: Test file exists
-      run: grep -i "dragon" dragon.txt 
-      
+      shell: powershell
+      run: Select-String -Path dragon.txt -Pattern "dragon"
+
+
   deploy_job_3:
     needs: test_job_2
     runs-on: self-hosted
     steps:
-    
+
     # - name: Download dragon text file
     #   uses: actions/download-artifact@v4
     #   with:
     #     name: dragon-text-file
-        
+
     - name: Read file
-      run: cat dragon.txt
+      shell: powershell
+      run: Get-Content -Path dragon.txt
 
     - name: Deploy
-      run: echo Deploying .... in the self-hosted machine
+      shell: powershell
+      run: Write-Output "Deploying .... in the self-hosted machine"
+
   
