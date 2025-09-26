@@ -4,8 +4,7 @@ on:
       environment:
         description: "Choose environment"
         required: true
-        default: dev
-        type: choice
+
 
 
 jobs:
